@@ -286,7 +286,7 @@
 
             "metadata": {
 
-                "description": "VM to use for the bigcompute launcher."
+                "description": "VM to use for the FTAcompute launcher."
 
             }
 
@@ -404,17 +404,17 @@
 
     "variables": {
 
-        "BigComputeBenchName": "bigcomputebench",
+        "FTAComputeBenchName": "ftacomputebench",
 
-        "namingInfix": "[toLower(substring(concat('bigcomp', uniqueString(resourceGroup().id)), 0, 12))]",
+        "namingInfix": "[toLower(substring(concat('ftacomp', uniqueString(resourceGroup().id)), 0, 12))]",
 
         "virtualNetworkName": "[concat(variables('namingInfix'),'vnet')]",
 
         "NSGName": "[concat(variables('namingInfix'),'nsg')]",
 
-        "BigComputeBenchIPConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
+        "FTAComputeBenchIPConfigName": "[concat(variables('namingInfix'), 'ipconfig')]",
 
-        "BigComputeBenchNicName": "[concat(variables('namingInfix'), 'nic')]",
+        "FTAComputeBenchNicName": "[concat(variables('namingInfix'), 'nic')]",
 
         "subnetName": "[concat(variables('namingInfix'),'subnet')]",
 
@@ -428,7 +428,7 @@
 
         "publicIPAddressName": "[concat(variables('namingInfix'), 'pip')]",
 
-        "scriptUrl": "https://raw.githubusercontent.com/mkiernan/bigcomputebench/master/",
+        "scriptUrl": "https://github.com/mikewarr/FTA-HPC-AzureBatch/blob/master/BatchMasterClass",
 
         "StorageMap": {
 
@@ -850,7 +850,7 @@
 
             "type": "Microsoft.Network/networkInterfaces",
 
-            "name": "[variables('BigComputeBenchNicName')]",
+            "name": "[variables('FTAComputeBenchNicName')]",
 
             "apiVersion": "[variables('networkApiVersion')]",
 
@@ -862,7 +862,7 @@
 
                     {
 
-                        "name": "[variables('BigComputeBenchIPConfigName')]",
+                        "name": "[variables('FTAComputeBenchIPConfigName')]",
 
                         "properties": {
 
@@ -902,7 +902,7 @@
 
             "type": "Microsoft.Compute/virtualMachines",
 
-            "name": "[variables('BigComputeBenchName')]",
+            "name": "[variables('FTAComputeBenchName')]",
 
             "apiVersion": "[variables('computeApiVersion')]",
 
@@ -918,7 +918,7 @@
 
                 "osProfile": {
 
-                    "computerName": "[variables('BigComputeBenchName')]",
+                    "computerName": "[variables('FTAComputeBenchName')]",
 
                     "adminUsername": "[parameters('adminUsername')]",
 
@@ -948,7 +948,7 @@
 
                         {
 
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('BigComputeBenchNicName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('FTAComputeBenchNicName'))]"
 
                         }
 
@@ -1000,7 +1000,7 @@
 
                     "dependsOn": [
 
-                        "[concat('Microsoft.Compute/virtualMachines/', variables('BigComputeBenchName'))]"
+                        "[concat('Microsoft.Compute/virtualMachines/', variables('FTAComputeBenchName'))]"
 
                     ]
 
@@ -1010,7 +1010,7 @@
 
             "dependsOn": [
 
-                "[concat('Microsoft.Network/networkInterfaces/', variables('BigComputeBenchNicName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', variables('FTAComputeBenchNicName'))]"
 
             ]
 

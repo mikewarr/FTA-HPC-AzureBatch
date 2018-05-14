@@ -1,6 +1,7 @@
 # Azure Batch HPC (Big Compute) Lab
 * Microsoft EMEA Big Compute (HPC) Team - <mailto:EMEAGBBBigComputeTSP @ microsoft.com>
 * Initial versions by Karl Podesta, September 2017
+* Edited and adapted for FastTrack for Azure by Mike Warrington, May 2018
 
 ## 1. Introduction
 
@@ -18,35 +19,37 @@ If this is your first time with Azure Batch, you might want to read the <a href=
 
 The following steps will be needed for setup:
 1. Login to Azure
-2. Create an Azure Batch account (or use an existing one)
-3. Create an Azure Storage account (or use an existing one)
-4. Change/Review Azure limits
-5. Download the "Batch Labs" GUI tool (beta) [optional]
-6. Download the "Storage Explorer" GUI tool
-7. Create a workstation (and connect to it)
+2. Create an Azure Batch account and an Azure Storage Account (or use an existing one)
+3. Change/Review Azure limits
+4. Download the "Batch Labs" GUI tool (beta) [optional]
+5. Download the "Storage Explorer" GUI tool
+6. Create a Linux workstation (and connect to it)
 
 ### 2.1 Login to Azure
 You can access Azure via <a href="https://portal.azure.com">https://portal.azure.com</a>.  You may have a subscription already.  If not, you can sign up for a subscription. 
 
 ### 2.2 Create an Azure Batch account (or use an existing one)
-In the Azure Portal, go to "+ Create a resource", type "Azure Batch", and select "Batch Service". 
+In the Azure Portal, go to "+ Create a resource", type "Azure Batch", and select "Batch Service".
 Click "Create" and enter an account name, and a resource group where this Azure Batch account will live.
-Select an existing, or create a new, storage account. This will be used for input/ouput files for Azure Batch Jobs.  
-Full details for creating an Azure Batch account are at this link: <a href="https://docs.microsoft.com/en-us/azure/batch/batch-account-create-portal">Create Azure Batch</a>. 
+Select an existing, or create a new, storage account. This will be used for input/ouput files for Azure Batch Jobs.
+
+We will be using the Azure Batch Account name and the Azure Batch Account URL. The URL can be found on the overview display for the account. 
+
+Full details for creating an Azure Batch account are at this link: <a href="https://docs.microsoft.com/en-us/azure/batch/batch-account-create-portal">Create Azure Batch Account</a>. 
 
 ### 2.3 Change/Review Azure limits
 There are default quotas and limits that apply to your Azure Batch account.  See here for more information: <a href="https://docs.microsoft.com/en-us/azure/batch/batch-quota-limit">Azure Batch Quotas and Limits</a>. 
 You can find further details on that webpage for changing these quotas.  For our workshop, we will use the quotas we have already. 
 
 ### 2.4 Download the "Batch Labs" GUI tool (beta) 
-You can download a recent build of "Batch Labs" for Windows from this GitHub repository (See "BatchLabs Setup 0.7.0.exe" file). 
-If you want to get the very latest version, and compile the code yourself or download the setup exe, the link for that is here: <a href="https://github.com/Azure/BatchLabs/releases">Azure Batch Labs (beta)</a>.
+You can download a recent build of "Batch Labs" for Windows from this GitHub repository (See "BatchLabs Setup 0.15.0.exe" file, as of May 2018). 
+If you want to get the very latest version, and compile the code yourself or download the setup exe for immediate installation, the link for that is here: <a href="https://github.com/Azure/BatchLabs/releases">Azure Batch Labs (beta)</a>.
 
 ### 2.5 Download the "Azure Storage Explorer" GUI tool
 This is a nice GUI tool you can use to interact with your storage on Azure.  You can download it from here: <a href="https://azure.microsoft.com/en-gb/features/storage-explorer/">Azure Storage Explorer</a>. 
 
 ### 2.6 Create a workstation
-In order to develop your Azure Batch job, and submit your job, you will do this from a workstation.  The following link will allow you to create a (Linux - Ubuntu 17.04) workstation in Azure, with all the dependencies you need. You can click on the "Deploy to Azure" button, and the workstation will take a few minutes to deploy.  Once it is deployed, you can inspect the connection details (public IP address, with the username and password you entered), and connect to this via SSH (e.g. if on Windows, you can use "PuTTY" software to connect).  The link is here: https://github.com/mkiernan/bigcomputebench
+In order to develop your Azure Batch job, and submit your job, you will do this from a workstation.  The following link will allow you to create a (Linux - Ubuntu 17.04) workstation in Azure, with all the dependencies you need. You can click on the "Deploy to Azure" button, and the workstation will take a few minutes to deploy.  Once it is deployed, you can inspect the connection details (public IP address, with the username and password you entered), and connect to this via SSH (e.g. if on Windows, you can use "PuTTY" software to connect).  The link is here: https://github.com/mikewarr/FTA-HPC-AzureBatch/blob/master/BatchMasterClass
 __Warning: you may want to shut down your Linux workstation when you complete the lab, as there is no security configured__
 
 ## 3. Access & Use
@@ -74,15 +77,29 @@ The following steps will be followed to complete a job:
 
 ### 4.1 Upgrade the Azure CLI 
 
-You will need to upgrade the "Azure CLI" package on your Linux workstation: 
-	sudo apt-get update
-	sudo apt-get upgrade azure-cli
+You will need to upgrade the "Azure CLI" package on your Linux workstation:
+
+	
 	AZ_REPO=$(lsb_release -cs)
+	
+
 	echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
      sudo tee /etc/apt/sources.list.d/azure-cli.list
-	 az extension add --source https://github.com/Azure/azure-batch-cli-extensions/releases/download/azure-batch-cli-extensions-2.2.2/azure_batch_cli_extensions-2.2.2-py2.py3-none-any.whl
+    
+	sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
+
+curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+
+sudo apt-get update
+
+sudo apt-get install apt-transport-https
+
+sudo apt-get update && sudo apt-get install azure-cli
+
+az extension add --source https://github.com/Azure/azure-batch-cli-extensions/releases/download/azure-batch-cli-extensions-2.2.2/azure_batch_cli_extensions-2.2.2-py2.py3-none-any.whl
 
 Check your Azure Login is working: 
+
 	az login
 	az account list
 
