@@ -49,7 +49,10 @@ If you want to get the very latest version, and compile the code yourself or dow
 This is a nice GUI tool you can use to interact with your storage on Azure.  You can download it from here: <a href="https://azure.microsoft.com/en-gb/features/storage-explorer/">Azure Storage Explorer</a>. 
 
 ### 2.6 Create a workstation
-In order to develop your Azure Batch job, and submit your job, you will do this from a workstation.  The following link will allow you to create a (Linux - Ubuntu 17.04) workstation in Azure, with all the dependencies you need. You can click on the "Deploy to Azure" button, and the workstation will take a few minutes to deploy.  Once it is deployed, you can inspect the connection details (public IP address, with the username and password you entered), and connect to this via SSH (e.g. if on Windows, you can use "PuTTY" software to connect).  The link is here: <a href="https://raw.githubusercontent.com/mikewarr/FTA-HPC-AzureBatch/demo-1.1/BatchMasterClass/ftaComputeBench/bigcomputebench.json">Create Linux Workstation</a>.
+In order to develop your Azure Batch job, and submit your job, you will do this from a workstation.  The following link will allow you to create a (Linux - Ubuntu 17.04) workstation in Azure, with all the dependencies you need. You can click on the "Deploy to Azure" button, and the workstation will take a few minutes to deploy.  Once it is deployed, you can inspect the connection details (public IP address, with the username and password you entered), and connect to this via SSH (e.g. if on Windows, you can use "PuTTY" software to connect).  
+
+The link is here: <a href="https://github.com/mikewarr/FTA-HPC-AzureBatch/tree/demo-1.1/BatchMasterClass/ftaComputeBench">Create Linux Workstation</a>.
+
 __Warning: you may want to shut down your Linux workstation when you complete the lab, as there is no security configured__
 
 ## 3. Access & Use
