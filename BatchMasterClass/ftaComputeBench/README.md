@@ -6,7 +6,8 @@ This template deploys a single VM pre-configured with all the common tools requi
 
 NB: Only Ubuntu 17.04 has been tested with the extension script. 
 <br><br>
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2mikewarr%2FTA-HPC-AzureBatch%2demo-1.1%2FBatchMasterClass%2FftaComputeBench%2Fbigcomputebench.json" target="_blank">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmikewarr%2FFTA-HPC-AzureBatch%2Fdemo-1.1%2FBatchMasterClass%2FftaComputeBench%2Fbigcomputebench.json" target="_blank">
+
     <img src="http://azuredeploy.net/deploybutton.png"/>
 </a>
 <br>
