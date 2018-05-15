@@ -1,4 +1,4 @@
-# Bigcomputebench
+# FTAcomputebench
 
 Basecamp workstation for Azure Batch &amp; BigCompute
 

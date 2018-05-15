@@ -82,19 +82,18 @@ You will need to upgrade the "Azure CLI" package on your Linux workstation:
 	
 	AZ_REPO=$(lsb_release -cs)
 	
-
 	echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
      sudo tee /etc/apt/sources.list.d/azure-cli.list
     
 	sudo apt-key adv --keyserver packages.microsoft.com --recv-keys 52E16F86FEE04B979B07E28DB02C46DF417A0893
 
-curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+	curl -L https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 
-sudo apt-get update
+	sudo apt-get update
 
-sudo apt-get install apt-transport-https
+	sudo apt-get install apt-transport-https
 
-sudo apt-get update && sudo apt-get install azure-cli
+	sudo apt-get update && sudo apt-get install azure-cli
 
 az extension add --source https://github.com/Azure/azure-batch-cli-extensions/releases/download/azure-batch-cli-extensions-2.2.2/azure_batch_cli_extensions-2.2.2-py2.py3-none-any.whl
 
